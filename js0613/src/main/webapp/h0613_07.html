@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>                                          강사님 내용 수정하세요
+		<meta charset="UTF-8">
+			<title>Date</title>
+			<script>
+			var today = new Date(); //객체선언
+			var lastDate = new Date(2023,11,31);
+			
+			function add(){
+				var nowMonth = today.getMonth();
+				var nowDate = today.getDate();
+				var nowDay = today.getDay();
+				var dayStr ="";
+				if(nowDay==0)datyStr ="일요일";
+				else if(nowDay==1) dayStr="월요일";
+				else if(nowDay==2) dayStr="화요일";
+				else if(nowDay==3) dayStr="수요일";
+				else if(nowDay==3) dayStr="목요일";
+				else if(nowDay==5) dayStr="금요일";
+				else dayStr="토요일";
+				
+				console.log(nowMonth);
+				console.log(nowDate);
+				console.log(nowDay);		
+				
+				document.getElementById("h01").innerText=(nowMonth+1)+"월"+nowDate+"일"+dayStr;
+				//.innerHTML ?innerText
+			}
+			
+			function  dDay(){
+				var dDayTime = lastDate.getTime() -today.getTime(); // 시간에서 시간을 뺌 
+				var dDay = Math.ceil(dDayTime/(1000*60*60*24));
+				document.getElementById("h02").innerText=dDay+" 일";
+			}
+			</script>		
+			<style>
+			*{padding:0; margin: 0;}
+			h2{width: 800px; font-size: 30px; text-align: center;margin: 30px auto;}
+			div{width: 800px; text-align: center; margin: 0 auto;}
+			
+			</style>
+			
+			</head>
+		<body>
+			<<!-- h2>[  현재날짜 ]</h2>
+			<h2 id="h02"></h2>
+			<div>
+			<button type="button" onclick="dDay()">일수계산</button>	</div>
+			<hr> -->
+			<h2>[  현재시간  ]</h2>
+			<h2 id="h01">00:00:00</h2>
+			<div>
+			<button onclick="onclickStart()">현재시간 시작</button>	
+			<button onclick="onclickStop()">현재시간 멈춤</button>	
+			</div>
+			<!-- <button type="button" onclick="()"></button><!--  -->	 -->		
+		
+			
+		</body>
+</html>
