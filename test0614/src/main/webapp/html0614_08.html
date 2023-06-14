@@ -1,0 +1,190 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
+		<style type="text/css">			
+			*{padding: 0; margin: 0;}
+			he{width: 800px; text-align: center; ;}
+			form,h2,table{width: 1050px; margin: 30px auto;text-align: center;}
+			table,th,td{border: 1px solid black; border-collapse: collapse;}
+			th{height: 40px; background: #EFEFEF;}	
+			td{width: 150px; height: 35px;}		
+		</style>
+		<script>
+		let temp=0;		//등록
+		let count=101; // 101번부터 시작
+			$(function(){
+				$("#writeBtn").click(function(){
+						//alert("jjjjjjj");
+						//$("#t01").text("");
+						
+					 	let stuNo = count;
+					 	let name = $("#name").val();
+					 	let kor = $("#kor").val();
+					 	let eng = $("#eng").val();
+					 	let total = Number(kor)+Number(eng)+Number(math);
+					 	let avg = (total/3.0).toFixed(2);					 	
+					 	
+					 	console.log(stuNo,name,kor,eng,math);
+					 	
+					 	let htmlData='';
+					 	
+					 	if(temp == 0) {
+					 		alert()
+					 	htmlData += '<tr id= >"'+ stuNo +'</td>';
+					 	htmlData += '<td>'+name+'</td>';
+					 	htmlData += '<td>'+kor+'</td>';
+					 	htmlData += '<td>'+eng+'</td>';
+					 	htmlData += '<td>'+math+'</td>';
+					 	htmlData += '<td>'+total+'</td>';
+					 	htmlData += '<td>'+avg+'</td>';
+					 	htmlData += '<td>'+'<button onclick="modiBtn('+ stuNo +')">수정</button>&nbsp;<button onclick="deleteBtn('+ stuNo +')">삭제</button>'+'</td>';
+					 	$("#"+stuNo).prepend(htmlData);
+							count++;
+							
+					 	}else if(temp == 1){
+					 		stuNo = $("#stuNo").val();
+					 		htmlData += '<td>'+ stuNo +'</td>';
+						 	htmlData += '<td>'+name+'</td>';
+						 	htmlData += '<td>'+kor+'</td>';
+						 	htmlData += '<td>'+eng+'</td>';
+						 	htmlData += '<td>'+math+'</td>';
+						 	htmlData += '<td>'+total+'</td>';
+						 	htmlData += '<td>'+avg+'</td>';
+						 	htmlData += '<td>'+'<button onclick="modiBtn('+ stuNo +')">수정</button>&nbsp;<button onclick="deleteBtn('+ stuNo +')">삭제</button>'+'</td>';
+						 	$("#"+stuNo).html(htmlData);
+		
+					 	}
+					 	
+					 	//$("#tbody").append(htmlData); //aapend(오름차순), prepend(내림차순),html(표의 내용 삭제)
+					 	
+					 	$("#stuNo").val("");
+					 	$("#name").val("");
+					 	$("#kor").val("");
+					 	$("#eng").val("");
+					 	$("#math").val("");
+					 	
+					 	temp = 0;
+					 	
+					}) 
+				//데이터 가져오기
+				$("#jsonBtn").click(function(){					
+				
+				$.ajax({
+					url:"js/student.json",        // 전송 페이지
+					type:"get",				      // 전송 방식 - get, post
+					data:{"id":"aaa","pw":"1111"},// 전송할 데이터
+					dataType:"json",		      // 요청한 데이터 방식
+					success:function(data){       // 성공일때 
+						//alert("성공");
+						console.log(data);
+						
+						let htmlData='';
+						for(var i=0;i<data.length;i++){
+							//data[0],data[1].....data[99]		
+						htmlData += '<tr id = "'+ data[i].stuNo +'" ><td>'+ data[i].stuNo +'</td>';
+					 	htmlData += '<td>'+data[i].name+'</td>';
+					 	htmlData += '<td>'+data[i].kor+'</td>';
+					 	htmlData += '<td>'+data[i].eng+'</td>';
+					 	htmlData += '<td>'+data[i].math+'</td>';
+					 	htmlData += '<td>'+data[i].total+'</td>';
+					 	htmlData += '<td>'+Number(data[i].avg).toFixed(2)+'</td>';
+					 	htmlData += '<td>'+'<button onclick="modifyBtn('+ data[i].stuNo +')">수정</button>&nbsp;<button onclick="deleteBtn('+ data[i].stuNo +')">삭제</button>'+'</td></tr>';
+							}			//for			
+					 	$("#tbody").append(htmlData);
+					
+					},
+					error:function(){	    		// 실패일때
+						alert("실패");
+					}				
+				
+				});		// ajax		
+			});// click
+				
+			});// 제이쿼리			
+
+			//삭제함수
+			function deleteBtn(num){ // num:불러오기만 하는 명 아래거와 동일하게!!학
+				$("#"+num).remove();
+			};
+			
+			// 수정함수
+			function modifyBtn(num){
+				temp=1; //수정 //alert(temp);
+				alert("수정버튼을 클릭했습니다.");
+				let td = $("#"+stuNo).children();
+				let stuNo = td.eq(0).text();
+			 	let name = td.eq(1).text();
+			 	let kor = td.eq(2).text();
+			 	let eng = td.eq(3).text();
+			 	let math = td.eq(4).text();		
+
+		 	console.log(name);
+			
+		 	$("#stuNo").val(stuNo);
+		 	$("#name").val(name);
+		 	$("#kor").val(kor);
+		 	$("#eng").val(eng);
+		 	$("#math").val(math);							
+		}		
+		</script>
+		
+	</head>
+	<body>
+	<h2>학생성적 등록</h2>
+		<form action="" name="frm" method="get">
+			<input type="hidden" id="stuNo" name="stuNo">
+			<label>번호</label>
+			<input type="text" id="writeBtn" name="no">
+			<br>
+			<label>이름</label>
+			<input type="text" id="name" name="name">
+			<br>
+			<label>국어</label>
+			<input type="text" id="kor" name="kor">
+			<br>
+			<label>영어</label>
+			<input type="text" id="eng" name="eng">
+			<br>
+			<label>수학</label>
+			<input type="text" id="math" name="math">
+			<br>
+			<button type="button" id="writeBtn">성적등록</button>
+		
+		</form>
+		<br>
+		
+		<button id="jsonBtn">데이터가져오기</button>
+		<h2>학생성적 관리 시스템</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>이름</th>
+					<th>국어</th>
+					<th>영어</th>
+					<th>수학</th>
+					<th>합계</th>
+					<th>평균</th>
+					<th>삭제여부</th>
+			</thead>	
+			<tbody id="tbody">
+				<!-- <tr id="1">
+					<td>1</td>
+					<td>홍길동</td>
+					<td>100</td>
+					<td>100</td>
+					<td>100</td>
+					<td>300</td>
+					<td>100.00</td>
+					<td>
+					<button onclick="modiBtn(1)">수정</button>&nbsp;<button onclick="deleteBtn(1)">삭제</button>
+				</tr> -->
+		
+			</tbody>		
+		</table>	
+	</body>
+</html>

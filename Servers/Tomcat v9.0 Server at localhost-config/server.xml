@@ -60,7 +60,7 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector URIEncoding="utf-8" connectionTimeout="20000" maxParameterCount="1000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
+    <Connector connectionTimeout="20000" maxParameterCount="1000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -160,7 +160,18 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="shopMall" path="/shopMall" reloadable="true" source="org.eclipse.jst.jee.server:shopMall"/><Context docBase="test0608" path="/test0608" reloadable="true" source="org.eclipse.jst.jee.server:test0608"/><Context docBase="html0608" path="/html0608" reloadable="true" source="org.eclipse.jst.jee.server:html0608"/><Context docBase="test0609" path="/test0609" reloadable="true" source="org.eclipse.jst.jee.server:test0609"/><Context docBase="js0612" path="/js0612" reloadable="true" source="org.eclipse.jst.jee.server:js0612"/><Context docBase="html0612" path="/html0612" reloadable="true" source="org.eclipse.jst.jee.server:html0612"/><Context docBase="htmlSource" path="/htmlSource" reloadable="true" source="org.eclipse.jst.jee.server:htmlSource"/><Context docBase="test0612" path="/test0612" reloadable="true" source="org.eclipse.jst.jee.server:test0612"/></Host>
+      <Context docBase="test0612" path="/test0612" reloadable="true" source="org.eclipse.jst.jee.server:test0612"/>
+      <Context docBase="test0614" path="/test0614" reloadable="true" source="org.eclipse.jst.jee.server:test0614"/>
+      <Context docBase="test0608" path="/test0608" reloadable="true" source="org.eclipse.jst.jee.server:test0608"/>
+      <Context docBase="html0612" path="/html0612" reloadable="true" source="org.eclipse.jst.jee.server:html0612"/>
+      <Context docBase="test0609" path="/test0609" reloadable="true" source="org.eclipse.jst.jee.server:test0609"/>
+      <Context docBase="htmlSource" path="/htmlSource" reloadable="true" source="org.eclipse.jst.jee.server:htmlSource"/>
+      <Context docBase="shopMall" path="/shopMall" reloadable="true" source="org.eclipse.jst.jee.server:shopMall"/>
+      <Context docBase="js0612" path="/js0612" reloadable="true" source="org.eclipse.jst.jee.server:js0612"/>
+      <Context docBase="js0613" path="/js0613" reloadable="true" source="org.eclipse.jst.jee.server:js0613"/>
+      <Context docBase="html0608" path="/html0608" reloadable="true" source="org.eclipse.jst.jee.server:html0608"/>
+      <Context docBase="test061401" path="/test061401" reloadable="true" source="org.eclipse.jst.jee.server:test061401"/>
+      <Context docBase="test0614001" path="/test0614001" reloadable="true" source="org.eclipse.jst.jee.server:test0614001"/></Host>
     </Engine>
   </Service>
 </Server>
